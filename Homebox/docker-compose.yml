@@ -1,0 +1,17 @@
+---
+services:
+  homebox:
+    #   image: ghcr.io/sysadminsmedia/homebox:latest-rootless
+    container_name: homebox
+    environment:
+      - HBOX_LOG_LEVEL=info
+      - HBOX_LOG_FORMAT=text
+      - HBOX_WEB_MAX_UPLOAD_SIZE=10
+      - HBOX_OPTIONS_CURRENCY_CONFIG=/hbox_currency.json
+    image: ghcr.io/sysadminsmedia/homebox:latest
+    ports:
+      - 3100:7745
+    restart: unless-stopped
+    volumes:
+      - ./.data/data:/data/
+      - ./hbox_currency.json:/hbox_currency.json
