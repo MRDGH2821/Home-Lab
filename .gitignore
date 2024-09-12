@@ -1,0 +1,6 @@
+!.data/etc/resolv.conf
+.data/
+.env
+Domain-Registration/dns-providers
+duckdns_update.log
+PostgreSQL/initdb.d/config.*

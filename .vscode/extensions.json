@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "bennycode.sort-everything",
+    "bierner.github-markdown-preview",
+    "clover.md-table-editor",
+    "cweijan.vscode-office",
+    "davidanson.vscode-markdownlint",
+    "esbenp.prettier-vscode",
+    "fnando.linter",
+    "foxundermoon.shell-format",
+    "michaelcurrin.auto-commit-msg",
+    "mikestead.dotenv",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml",
+    "vivaxy.vscode-conventional-commits"
+  ]
+}

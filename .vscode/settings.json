@@ -1,0 +1,37 @@
+{
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "code-runner.runInTerminal": true,
+  "continue.pauseTabAutocompleteOnBattery": true,
+  "conventionalCommits.scopes": ["vscode", "cosmos", "yamllint"],
+  "cSpell.words": ["duckdns"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "git.enableCommitSigning": true,
+  "linter.linters": {
+    "yamllint": {
+      "capabilities": ["ignore-line"],
+      "command": [
+        "yamllint",
+        "--format",
+        "parsable",
+        ["$config", "--config-file", "$config"],
+        "-"
+      ],
+      "configFiles": [".yamllint.yml", ".yamllint.yaml", ".yamllint"],
+      "enabled": true,
+      "languages": ["yaml", "dockercompose"],
+      "name": "yamllint",
+      "url": "https://github.com/adrienverge/yamllint"
+    }
+  }
+}
