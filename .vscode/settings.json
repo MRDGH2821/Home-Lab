@@ -12,9 +12,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "code-runner.runInTerminal": true,
-  "continue.pauseTabAutocompleteOnBattery": true,
-  "conventionalCommits.scopes": ["vscode", "cosmos", "yamllint"],
-  "cSpell.words": ["duckdns"],
+  "conventionalCommits.scopes": ["vscode", "yamllint", "cosmos-cloud", "app"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "git.enableCommitSigning": true,
   "linter.linters": {
