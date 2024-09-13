@@ -16,6 +16,7 @@
     "app",
     "cosmos-cloud",
     "cspell",
+    "dns",
     "vscode",
     "yamllint"
   ],
