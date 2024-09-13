@@ -12,7 +12,13 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "code-runner.runInTerminal": true,
-  "conventionalCommits.scopes": ["vscode", "yamllint", "cosmos-cloud", "app"],
+  "conventionalCommits.scopes": [
+    "app",
+    "cosmos-cloud",
+    "cspell",
+    "vscode",
+    "yamllint"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "git.enableCommitSigning": true,
   "linter.linters": {
