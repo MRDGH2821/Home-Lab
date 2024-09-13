@@ -1,4 +1,3 @@
----
 services:
   gitlab:
     container_name: gitlab

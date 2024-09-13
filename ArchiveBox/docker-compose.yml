@@ -11,7 +11,6 @@
 #     docker compose run archivebox help
 # Documentation:
 #     https://github.com/ArchiveBox/ArchiveBox/wiki/Docker#docker-compose
----
 networks:
   # network just used for pihole container to offer :53 dns resolving on fixed ip for archivebox container
   dns:

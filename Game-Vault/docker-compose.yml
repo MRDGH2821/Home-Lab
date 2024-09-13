@@ -1,4 +1,3 @@
----
 services:
   gamevault:
     container_name: gamevault

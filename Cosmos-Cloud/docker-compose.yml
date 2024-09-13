@@ -1,4 +1,3 @@
----
 services:
   cosmos-db:
     container_name: cosmos-db
@@ -17,6 +16,7 @@ services:
     depends_on:
       - cosmos-db
     environment:
+      # trunk-ignore(checkov/CKV_SECRET_4)
       COSMOS_MONGODB: mongodb://cosmosdb:cosmosdb@cosmos-db:27017
     hostname: cosmos-server
     image: azukaar/cosmos-server:latest

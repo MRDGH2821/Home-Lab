@@ -1,4 +1,3 @@
----
 name: pgAdmin4
 services:
   pgadmin4:
