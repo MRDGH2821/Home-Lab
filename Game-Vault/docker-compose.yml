@@ -1,0 +1,18 @@
+---
+services:
+  gamevault:
+    container_name: gamevault
+    env_file:
+      - .env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      VOLUMES_FILES: /gamevault/files
+      VOLUMES_IMAGES: /gamevault/images
+    image: phalcode/gamevault-backend:latest
+    ports:
+      - 8080:8080/tcp
+    restart: unless-stopped
+    volumes:
+      - ./.data/gamevault/files:/gamevault/files
+      - ./.data/gamevault/images:/gamevault/images

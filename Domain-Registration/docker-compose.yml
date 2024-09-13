@@ -1,0 +1,13 @@
+---
+services:
+  lego:
+    command: /register/register-duckdns.sh
+    container_name: lets-encrypt-go
+    entrypoint: /usr/bin/env sh
+    env_file:
+      - .env
+    image: goacme/lego
+    volumes:
+      - ./.data/.lego:/.lego
+      - ./register:/register
+      - ./dns-providers:/dns-providers

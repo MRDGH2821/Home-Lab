@@ -1,0 +1,30 @@
+---
+services:
+  cosmos-db:
+    container_name: cosmos-db
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: cosmosdb
+      MONGO_INITDB_ROOT_USERNAME: cosmosdb
+    hostname: cosmos-db
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: always
+    volumes:
+      - ./.data/data/db:/data/db
+  cosmos-server:
+    container_name: cosmos-server
+    depends_on:
+      - cosmos-db
+    environment:
+      COSMOS_MONGODB: mongodb://cosmosdb:cosmosdb@cosmos-db:27017
+    hostname: cosmos-server
+    image: azukaar/cosmos-server:latest
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /:/mnt/host
+      - ./.data/config:/config
+      - ./.data/etc/resolv.conf:/etc/resolv.conf

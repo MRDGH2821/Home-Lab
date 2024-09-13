@@ -1,0 +1,23 @@
+---
+services:
+  gitlab:
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        # Add any other gitlab.rb configuration here, each on its own line
+        external_url 'https://gitlab.mihirr-home.duckdns.org'
+        # Specify the pre-stop hook
+        pre_stop_script 'gitlab-backup create'
+        gitlab_rails['gitlab_shell_ssh_port'] = 3992
+    hostname: gitlab.mihirr-home.duckdns.org
+    image: gitlab/gitlab-ce
+    ports:
+      - 1980:80
+      - 19443:443
+      - 3922:22
+    restart: unless-stopped
+    shm_size: 256m
+    volumes:
+      - ./.data/etc/gitlab:/etc/gitlab
+      - ./.data/var/log/gitlab:/var/log/gitlab
+      - ./.data/var/opt/gitlab:/var/opt/gitlab

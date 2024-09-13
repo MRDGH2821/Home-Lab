@@ -1,0 +1,22 @@
+---
+services:
+  duckdns-updater:
+    command:
+      [
+        /bin/bash,
+        -c,
+        "ip addr show ${WIFI_ADAPTER}",
+        "|",
+        'grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"',
+        "|",
+        head -n 1,
+      ]
+    container_name: duckdns-updater
+    env_file:
+      - .env
+    hostname: duckdns-updater
+    image: mcr.microsoft.com/devcontainers/base:alpine
+    network_mode: host
+    volumes:
+      - ./duckdns_update.log:/duckdns_update.log
+      - ./update-duck.sh:/update-duck.sh
