@@ -1,5 +1,15 @@
 {
   "allowCompoundWords": true,
   "language": "en-GB,en-IN",
-  "words": ["Homebox", "Jellyfin", "Mullvad", "Prowlarr", "Radarr"]
+  "useGitignore": true,
+  "words": [
+    "dbname",
+    "duckdns",
+    "homebox",
+    "initdb",
+    "jellyfin",
+    "mullvad",
+    "prowlarr",
+    "radarr"
+  ]
 }
