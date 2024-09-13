@@ -3,6 +3,11 @@ services:
   lego:
     command: /register/register-duckdns.sh
     container_name: lets-encrypt-go
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+      - 8.8.4.4
+      - 1.0.0.1
     entrypoint: /usr/bin/env sh
     env_file:
       - .env
