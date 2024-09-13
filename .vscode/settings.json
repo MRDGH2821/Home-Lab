@@ -20,22 +20,5 @@
     "yamllint"
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "git.enableCommitSigning": true,
-  "linter.linters": {
-    "yamllint": {
-      "capabilities": ["ignore-line"],
-      "command": [
-        "yamllint",
-        "--format",
-        "parsable",
-        ["$config", "--config-file", "$config"],
-        "-"
-      ],
-      "configFiles": [".yamllint.yml", ".yamllint.yaml", ".yamllint"],
-      "enabled": true,
-      "languages": ["yaml", "dockercompose"],
-      "name": "yamllint",
-      "url": "https://github.com/adrienverge/yamllint"
-    }
-  }
+  "git.enableCommitSigning": true
 }

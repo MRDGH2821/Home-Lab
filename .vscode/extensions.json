@@ -7,13 +7,13 @@
     "davidanson.vscode-markdownlint",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
-    "fnando.linter",
     "foxundermoon.shell-format",
     "mikestead.dotenv",
     "ms-azuretools.vscode-docker",
     "redhat.vscode-yaml",
     "spmeesseman.vscode-taskexplorer",
     "streetsidesoftware.code-spell-checker",
+    "trunk.io",
     "vivaxy.vscode-conventional-commits"
   ]
 }
