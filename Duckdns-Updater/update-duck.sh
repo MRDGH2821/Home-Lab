@@ -15,7 +15,7 @@ log() {
 # Function to get the private IP address
 get_private_ip() {
     # shellcheck disable=SC2312
-    hostname -i | awk '{print $3}'
+    ip addr show | grep "inet " | grep -v "127.0.0.1" | awk '{print $2}' | cut -d '/' -f 1 | grep 192
 }
 
 # Function to get the public IP address
