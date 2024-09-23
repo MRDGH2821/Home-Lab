@@ -16,6 +16,11 @@ services:
     container_name: cosmos-server
     depends_on:
       - cosmos-db
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+      - 1.1.0.0
+      - 8.8.4.4
     environment:
       # trunk-ignore(checkov/CKV_SECRET_4)
       COSMOS_MONGODB: mongodb://cosmosdb:cosmosdb@cosmos-db:27017
@@ -29,4 +34,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /:/mnt/host
       - ./.data/config:/config
-      - ./.data/etc/resolv.conf:/etc/resolv.conf
