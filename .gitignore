@@ -1,7 +1,7 @@
-!.data/etc/resolv.conf
 .cache_ggshield
 .data/
 .env
 *.log
+acme.json
 Domain-Registration/dns-providers
 PostgreSQL/initdb.d/config.*
