@@ -1,0 +1,12 @@
+services:
+  dynudns-updater:
+    command: [/bin/bash, -c, /update-dynu.sh]
+    container_name: dynudns-updater
+    env_file:
+      - .env
+    hostname: dynudns-updater
+    image: mcr.microsoft.com/devcontainers/base:alpine
+    network_mode: host
+    volumes:
+      - ./dynudns_update.log:/dynudns_update.log
+      - ./update-dynu.sh:/update-dynu.sh
