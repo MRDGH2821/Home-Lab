@@ -32,5 +32,6 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
       - /:/mnt/host
       - ./.data/config:/config
