@@ -8,7 +8,6 @@ services:
         # Specify the pre-stop hook
         pre_stop_script 'gitlab-backup create'
         gitlab_rails['gitlab_shell_ssh_port'] = 3992
-    hostname: gitlab.mihirr-home.duckdns.org
     image: gitlab/gitlab-ce
     ports:
       - 1980:80
