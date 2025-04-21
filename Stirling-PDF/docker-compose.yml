@@ -2,7 +2,7 @@ services:
   stirling-pdf:
     image: frooodle/s-pdf:latest
     ports:
-      - "8080:8080"
+      - 8080:8080
     # volumes:
     # - ./.data/trainingData:/usr/share/tessdata # Required for extra OCR languages
     # - ./.data/extraConfigs:/configs
