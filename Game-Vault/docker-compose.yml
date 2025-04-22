@@ -53,6 +53,7 @@ services:
   gamevault-db-backup:
     command: |
       bash -c 'while true; do
+        sleep 300;
         pg_dump -Fc > /backups/gamevault_$$(date +%Y%m%d_%H%M%S).dump;
         find /backups -type f -mtime +7 -delete;
         sleep 86400;
