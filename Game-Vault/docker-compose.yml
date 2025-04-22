@@ -1,9 +1,13 @@
 services:
   gamevault-backend:
+    container_name: gamevault-backend
+    depends_on:
+      - gamevault-db
     environment:
-      DB_HOST: db
+      DB_HOST: gamevault-db
       DB_PASSWORD: gamevault
       DB_USERNAME: gamevault
+    hostname: gamevault-backend
     image: phalcode/gamevault-backend:latest
     ports:
       - 8080:8080/tcp
@@ -22,10 +26,12 @@ services:
           nocopy: true
           subpath: media
   gamevault-db:
+    container_name: gamevault-db
     environment:
       POSTGRES_DB: gamevault
       POSTGRES_PASSWORD: gamevault
       POSTGRES_USER: gamevault
+    hostname: gamevault-db
     image: postgres:16
     restart: unless-stopped
     volumes:
