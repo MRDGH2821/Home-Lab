@@ -1,4 +1,16 @@
 services:
+  backup-sync:
+    command: |
+      sh -c 'while true; do
+        cp -ru /source/* /destination/;
+        sleep 3600;
+      done'
+    depends_on:
+      - gamevault-db-backup
+    image: alpine:latest
+    volumes:
+      - db-backups:/source:ro
+      - gamevault-backup:/destination
   gamevault-backend:
     container_name: gamevault-backend
     depends_on:
@@ -35,13 +47,36 @@ services:
     image: postgres:16
     restart: unless-stopped
     volumes:
-      - source: gamevault
-        target: /var/lib/postgresql/data
-        type: volume
-        volume:
-          nocopy: true
-          subpath: var/lib/postgresql/data
+      - ./.data/var/lib/postgresql/data:/var/lib/postgresql/data
+      - db-backups:/backups
+
+  gamevault-db-backup:
+    command: |
+      bash -c 'while true; do
+        pg_dump -Fc > /backups/gamevault_$$(date +%Y%m%d_%H%M%S).dump;
+        find /backups -type f -mtime +7 -delete;
+        sleep 86400;
+      done'
+    depends_on:
+      - gamevault-db
+    environment:
+      PGHOST: gamevault-db
+      POSTGRES_DB: gamevault
+      POSTGRES_PASSWORD: gamevault
+      POSTGRES_USER: gamevault
+    image: postgres:16
+    volumes:
+      - db-backups:/backups
+
 volumes:
+  gamevault-backup:
+    driver: rclone
+    driver_opts:
+      allow_other: "true"
+      poll_interval: 0
+      remote: pcloud-homelab-data:backups/gamevault
+      vfs_cache_mode: full
+  db-backups:
   gamevault:
     driver: rclone
     driver_opts:
