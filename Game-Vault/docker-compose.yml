@@ -1,17 +1,45 @@
 services:
-  gamevault:
-    container_name: gamevault
-    env_file:
-      - .env
+  gamevault-backend:
     environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      VOLUMES_FILES: /gamevault/files
-      VOLUMES_IMAGES: /gamevault/images
+      DB_HOST: db
+      DB_PASSWORD: gamevault
+      DB_USERNAME: gamevault
     image: phalcode/gamevault-backend:latest
     ports:
       - 8080:8080/tcp
     restart: unless-stopped
     volumes:
-      - ./.data/gamevault/files:/gamevault/files
-      - ./.data/gamevault/images:/gamevault/images
+      - source: gamevault
+        target: /files
+        type: volume
+        volume:
+          nocopy: true
+          subpath: files
+      - source: gamevault
+        target: /media
+        type: volume
+        volume:
+          nocopy: true
+          subpath: media
+  gamevault-db:
+    environment:
+      POSTGRES_DB: gamevault
+      POSTGRES_PASSWORD: gamevault
+      POSTGRES_USER: gamevault
+    image: postgres:16
+    restart: unless-stopped
+    volumes:
+      - source: gamevault
+        target: /var/lib/postgresql/data
+        type: volume
+        volume:
+          nocopy: true
+          subpath: var/lib/postgresql/data
+volumes:
+  gamevault:
+    driver: rclone
+    driver_opts:
+      allow_other: "true"
+      poll_interval: 0
+      remote: pcloud-homelab-data:gamevault
+      vfs_cache_mode: full

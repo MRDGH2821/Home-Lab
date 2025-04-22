@@ -10,4 +10,12 @@ services:
       - 5051:443
     restart: unless-stopped
     volumes:
-      - ./.data/var/lib/pgadmin:/var/lib/pgadmin
+      - pgadmin4-config:/var/lib/pgadmin
+volumes:
+  pgadmin4-config:
+    driver: rclone
+    driver_opts:
+      remote: pcloud-homelab-data:pgadmin4/var/lib/pgadmin
+      allow_other: "true"
+      vfs_cache_mode: full
+      poll_interval: 0
