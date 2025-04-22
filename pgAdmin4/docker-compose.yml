@@ -10,9 +10,9 @@ services:
       - 5051:443
     restart: unless-stopped
     volumes:
-      - pgadmin4-config:/var/lib/pgadmin
+      - pgadmin4:/var/lib/pgadmin
 volumes:
-  pgadmin4-config:
+  pgadmin4:
     driver: rclone
     driver_opts:
       remote: pcloud-homelab-data:pgadmin4/var/lib/pgadmin
