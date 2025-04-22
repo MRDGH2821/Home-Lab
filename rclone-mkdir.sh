@@ -9,7 +9,7 @@ create_directory() {
   rclone mkdir pcloud-homelab-data:"${dir_name}"
 }
 
-preconfigured_paths=("/pgadmin4/var/lib/pgadmin" "/karakeep/data" "/meilisearch/meili_data" "/gamevault/var/lib/postgresql/data" "/gamevault/media" "/gamevault/files")
+preconfigured_paths=("/pgadmin4/var/lib/pgadmin" "/karakeep/data" "/meilisearch/meili_data")
 
 if [[ -z $1 ]]; then
   echo "No path provided. Using preconfigured paths."
