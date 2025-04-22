@@ -5,3 +5,4 @@
 acme.json
 Domain-Registration/dns-providers
 PostgreSQL/initdb.d/config.*
+pcloud-homelab
