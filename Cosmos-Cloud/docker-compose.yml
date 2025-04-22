@@ -4,7 +4,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_PASSWORD: cosmosdb
       MONGO_INITDB_ROOT_USERNAME: cosmosdb
-      TZ: Asia/Kolkata
+      TZ: Australia/Melbourne
     hostname: cosmos-db
     image: mongo
     ports:
@@ -24,7 +24,7 @@ services:
     environment:
       # trunk-ignore(checkov/CKV_SECRET_4)
       COSMOS_MONGODB: mongodb://cosmosdb:cosmosdb@cosmos-db:27017
-      TZ: Asia/Kolkata
+      TZ: Australia/Melbourne
     hostname: cosmos-server
     image: azukaar/cosmos-server:latest
     network_mode: host
