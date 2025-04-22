@@ -11,47 +11,59 @@ services:
     container_name: chrome
     image: gcr.io/zenika-hub/alpine-chrome:123
     restart: unless-stopped
-
   meilisearch:
     container_name: meilisearch
     env_file:
       - .env
     environment:
       MEILI_NO_ANALYTICS: "true"
-    image: getmeili/meilisearch:v1.6
+    image: getmeili/meilisearch:v1.13.3
     restart: unless-stopped
     volumes:
-      - ./.data/meili_data:/meili_data
-
+      - source: meilisearch
+        target: /meili_data/
+        type: volume
+        volume:
+          nocopy: true
+          subpath: meili_data/
   web:
-    container_name: hoarder-web
-    env_file:
-      - .env
-    environment:
-      DATA_DIR: /hoarder/data
-      MEILI_ADDR: http://meilisearch:7700
-      REDIS_HOST: valkey
-    image: ghcr.io/hoarder-app/hoarder-web:release
-    ports:
-      - 3000:3000
-    restart: unless-stopped
-    volumes:
-      - ./.data/hoarder/data:/hoarder/data
-
-  workers:
-    container_name: hoarder-workers
-    depends_on:
-      web:
-        condition: service_started
     env_file:
       - .env
     environment:
       BROWSER_WEB_URL: http://chrome:9222
-      DATA_DIR: /hoarder/data
-      MEILI_ADDR: http://meilisearch:7700
-      REDIS_HOST: http://valkey:6379
       # OPENAI_API_KEY: ...
-    image: ghcr.io/hoarder-app/hoarder-workers:release
+
+      # You almost never want to change the value of the DATA_DIR variable.
+      # If you want to mount a custom directory, change the volume mapping above instead.
+      DATA_DIR: /data # DON'T CHANGE THIS
+      MEILI_ADDR: http://meilisearch:7700
+    image: ghcr.io/karakeep-app/karakeep:${KARAKEEP_VERSION:-release}
+    ports:
+      - 3000:3000
     restart: unless-stopped
     volumes:
-      - ./.data/hoarder/data:/hoarder/data
+      # By default, the data is stored in a docker volume called "data".
+      # If you want to mount a custom directory, change the volume mapping to:
+      # - /path/to/your/directory:/data
+      - source: karakeep
+        target: /data/
+        type: volume
+        volume:
+          nocopy: true
+          subpath: data/
+
+volumes:
+  karakeep:
+    driver: rclone
+    driver_opts:
+      allow_other: "true"
+      poll_interval: 0
+      remote: pcloud-homelab-data:karakeep
+      vfs_cache_mode: full
+  meilisearch:
+    driver: rclone
+    driver_opts:
+      allow_other: "true"
+      poll_interval: 0
+      remote: pcloud-homelab-data:meilisearch
+      vfs_cache_mode: full
