@@ -1,16 +1,31 @@
 services:
+  cosmos-db:
+    container_name: cosmos-db
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: cosmosdb
+      MONGO_INITDB_ROOT_USERNAME: cosmosdb
+    hostname: cosmos-db
+    image: ${MONGO_IMAGE:-mongo:latest}
+    ports:
+      - 27017:27017
+    restart: always
+    volumes:
+      - ./.data/data/db:/data/db
   cosmos-server:
     container_name: cosmos-server
+    depends_on:
+      - cosmos-db
     dns:
-      - 1.1.1.1
-      - 8.8.8.8
-      - 8.8.4.4
       - 1.0.0.1
+      - 1.1.1.1
       - 127.0.0.1
+      - 8.8.4.4
+      - 8.8.8.8
     env_file:
       - .env
     environment:
-      TZ: Australia/Melbourne
+      # trunk-ignore(checkov/CKV_SECRET_4)
+      COSMOS_MONGODB: mongodb://cosmosdb:cosmosdb@cosmos-db:27017
     hostname: cosmos-server
     image: azukaar/cosmos-server:latest
     network_mode: host
